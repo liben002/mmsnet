@@ -1,4 +1,4 @@
-package com.pantherman594.mmsnet;
+package com.pantherman594.mmsnet.client;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.pantherman594.mmsnet;
+package com.pantherman594.mmsnet.server;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
