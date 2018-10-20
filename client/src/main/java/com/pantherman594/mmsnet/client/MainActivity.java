@@ -5,16 +5,16 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.view.View;
 import android.widget.TextView;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
-    
+
     final String[] VPN_Status = {"VPN: OFF","VPN: ON"};
     ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#4b77ef"));
     @Override
@@ -41,5 +41,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+    public void sendMessage(View view) {
+        EditText editText = (EditText) findViewById(R.id.editText2);
+        String phoneNumber = editText.getText().toString();
+        System.out.println(phoneNumber);
     }
 }
