@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -37,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
                 if (buttonView.isChecked()) {
                     status.setText(VPN_Status[1]);
                     getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4b77ef")));
-                    //actionBar.setBackgroundDrawable(colorDrawable);
+                    EditText editText = (EditText) findViewById(R.id.editText2);
+                    editText.setEnabled(false);
                 } else {
                     status.setText(VPN_Status[0]);
                     getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7e7e7e")));
+                    EditText editText = (EditText) findViewById(R.id.editText2);
+                    editText.setEnabled(true);
                 }
             }
         });
