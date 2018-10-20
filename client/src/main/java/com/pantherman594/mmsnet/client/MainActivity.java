@@ -1,15 +1,21 @@
 package com.pantherman594.mmsnet.client;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
+import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
+public class MainActivity extends AppCompatActivity {
+    
+    final String[] VPN_Status = {"VPN: OFF","VPN: ON"};
     ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#4b77ef"));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,32 +31,15 @@ public class MainActivity extends AppCompatActivity {
         // Checks for if the switch is on/off, then change the status text.
         VPN_Switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()){
+                if (buttonView.isChecked()) {
                     status.setText(VPN_Status[1]);
                     getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4b77ef")));
                     //actionBar.setBackgroundDrawable(colorDrawable);
-                }
-                else{
+                } else {
                     status.setText(VPN_Status[0]);
                     getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7e7e7e")));
                 }
             }
-
         });
     }
-
-    final String[] VPN_Status = {"VPN: OFF","VPN: ON"};
-
-
-
-   // VPN_Switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        //public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        //    if (buttonView.isChecked()){
-         //           status.setText(VPN_Status[1]);
-         //       }
-          //      else{
-          //          status.setText(VPN_Status[0]);
-         //       }
-         //   }
-       // });
 }

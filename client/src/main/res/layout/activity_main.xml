@@ -2,30 +2,36 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vpn_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/vpn_layout"
     tools:context=".MainActivity">
 
     <Switch
         android:id="@+id/VPN_Switch"
-        android:layout_width="45dp"
-        android:layout_height="28dp"
-        android:layout_marginBottom="96dp"
+        android:layout_width="77dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="60dp"
+        android:scaleX="2"
+        android:scaleY="2"
         app:layout_constraintBottom_toTopOf="@+id/VPN_Status"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.42"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/VPN_Status"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginBottom="212dp"
+        android:layout_width="108dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="192dp"
         android:hint="@string/VPN_toggle"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.constraint.Guideline
@@ -37,16 +43,31 @@
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="283dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="72dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
+        android:gravity="center"
         android:hint="@string/edit_number"
         android:inputType="phone"
         android:singleLine="false"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/VPN_Switch"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.507" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/send_button"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editText2" />
 </android.support.constraint.ConstraintLayout>
