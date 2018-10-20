@@ -12,6 +12,7 @@ public class Tunnel {
     }
 
     public String write() {
+        return "";
 
     }
 }
