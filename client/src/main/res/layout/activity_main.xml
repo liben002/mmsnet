@@ -12,12 +12,12 @@
         android:layout_width="77dp"
         android:layout_height="46dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="56dp"
         android:scaleX="2"
         android:scaleY="2"
         app:layout_constraintBottom_toTopOf="@+id/VPN_Status"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -25,13 +25,13 @@
         android:layout_width="108dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="192dp"
+        android:layout_marginBottom="84dp"
         android:hint="@string/VPN_toggle"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.constraint.Guideline
@@ -43,8 +43,8 @@
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="283dp"
-        android:layout_height="51dp"
+        android:layout_width="242dp"
+        android:layout_height="49dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="72dp"
         android:layout_marginBottom="8dp"
@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toTopOf="@+id/VPN_Switch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.507" />
+        app:layout_constraintVertical_bias="0.215" />
 
     <Button
         android:id="@+id/button"
@@ -65,10 +65,26 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/send_button"
         android:onClick="sendMessage"
+        android:text="@string/send_button"
         app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toEndOf="@+id/editText2" />
+
+    <TextView
+        android:id="@+id/phoneNum"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="34dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/VPN_Switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@string/phoneNum" />
 </android.support.constraint.ConstraintLayout>

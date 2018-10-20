@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MMSNet</string>
+    <string name="listenDescription">Listen for MMS</string>
+    <string name="listenStatus">Not listening for MMS</string>
 </resources>

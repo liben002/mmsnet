@@ -1,5 +1,6 @@
 package com.pantherman594.mmsnet.client;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,12 +11,14 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
     final String[] VPN_Status = {"VPN: OFF","VPN: ON"};
+
     ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#4b77ef"));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +44,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
+
     public void sendMessage(View view) {
         EditText editText = (EditText) findViewById(R.id.editText2);
         String phoneNumber = editText.getText().toString();
+        int duration = Toast.LENGTH_SHORT;
+
+        if (phoneNumber.length() != 10) {
+            Context context = getApplicationContext();
+            Toast toast = Toast.makeText(context, "Please submit a 10-digit phone number", duration);
+            toast.show();
+        } else {
+            ((TextView) findViewById(R.id.phoneNum)).setText("Phone Number: " + phoneNumber);
+            ((Switch) findViewById(R.id.VPN_Switch)).setChecked(true);
+        }
+
         System.out.println(phoneNumber);
     }
 }
