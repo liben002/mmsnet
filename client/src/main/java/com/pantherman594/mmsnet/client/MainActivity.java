@@ -1,20 +1,16 @@
 package com.pantherman594.mmsnet.client;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,16 +31,22 @@ public class MainActivity extends AppCompatActivity {
         // Checks for if the switch is on/off, then change the status text.
         VPN_Switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(numAuthenticate(((EditText) findViewById(R.id.editText2)).getText().toString())) {
+                    if (!buttonView.isChecked()) {
+                        status.setText(VPN_Status[0]);
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7e7e7e")));
+                        EditText editText = (EditText) findViewById(R.id.editText2);
+                        editText.setEnabled(true);
+                    }
+                }
+                else {
+                    VPN_Switch.setChecked(false);
+                }
                 if (buttonView.isChecked()) {
                     status.setText(VPN_Status[1]);
                     getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4b77ef")));
                     EditText editText = (EditText) findViewById(R.id.editText2);
                     editText.setEnabled(false);
-                } else {
-                    status.setText(VPN_Status[0]);
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7e7e7e")));
-                    EditText editText = (EditText) findViewById(R.id.editText2);
-                    editText.setEnabled(true);
                 }
             }
         });
@@ -53,17 +55,22 @@ public class MainActivity extends AppCompatActivity {
     public void sendMessage(View view) {
         EditText editText = (EditText) findViewById(R.id.editText2);
         String phoneNumber = editText.getText().toString();
-        int duration = Toast.LENGTH_SHORT;
 
-        if (phoneNumber.length() != 10) {
-            Context context = getApplicationContext();
-            Toast toast = Toast.makeText(context, "Please submit a 10-digit phone number", duration);
-            toast.show();
-        } else {
-            ((TextView) findViewById(R.id.phoneNum)).setText("Phone Number: " + phoneNumber);
+        if (numAuthenticate(phoneNumber)) {
             ((Switch) findViewById(R.id.VPN_Switch)).setChecked(true);
         }
 
         System.out.println(phoneNumber);
+    }
+
+    public boolean numAuthenticate(String phoneNumber) {
+        int duration = Toast.LENGTH_SHORT;
+        if(phoneNumber == null || phoneNumber.length() != 10) {
+            Context context = getApplicationContext();
+            Toast toast = Toast.makeText(context, "Please submit a 10-digit phone number", duration);
+            toast.show();
+            return false;
+        }
+        return true;
     }
 }

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()){
                     status.setText(Server_Status[1]);
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4b77ef")));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#54d160")));
                     //actionBar.setBackgroundDrawable(colorDrawable);
                 }
                 else{

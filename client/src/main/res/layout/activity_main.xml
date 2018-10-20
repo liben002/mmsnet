@@ -41,12 +41,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp" />
 
-    <EditText
+    <com.cielyang.android.clearableedittext.ClearableEditText
         android:id="@+id/editText2"
-        android:layout_width="242dp"
+        android:layout_width="256dp"
         android:layout_height="49dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="72dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:gravity="center"
@@ -55,36 +56,9 @@
         android:singleLine="false"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/VPN_Switch"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.215" />
+        app:layout_constraintVertical_bias="0.258" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="sendMessage"
-        android:text="@string/send_button"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toEndOf="@+id/editText2" />
-
-    <TextView
-        android:id="@+id/phoneNum"
-        android:layout_width="wrap_content"
-        android:layout_height="23dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="34dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/VPN_Switch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="@string/phoneNum" />
 </android.support.constraint.ConstraintLayout>
