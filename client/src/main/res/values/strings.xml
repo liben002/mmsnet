@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MMSNet Client</string>
     <string name="prefix">MN></string>
+    <string name="edit_number">Enter a phone number</string>
+    <string name="VPN_toggle">VPN: OFF</string>
+    <string name="send_button">Connect</string>
+    <string name="phoneNum">Phone Number: none</string>
 </resources>
