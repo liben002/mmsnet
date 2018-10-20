@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MMSNet</string>
+    <string name="app_name">MMSNet Client</string>
+    <string name="prefix">MN></string>
 </resources>
