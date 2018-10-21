@@ -8,6 +8,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.VpnService;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,10 +22,11 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     final String[] VPN_Status = {"VPN: OFF","VPN: ON"};
-
+    boolean toastBoolean = true;
     ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#4b77ef"));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -50,36 +53,61 @@ public class MainActivity extends AppCompatActivity {
         final Switch VPN_Switch = (Switch) findViewById(R.id.VPN_Switch);
 
         //ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.vpn_layout);
+        final EditText editText = (EditText) findViewById(R.id.editText2);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                status.setText(VPN_Status[0]);
+                VPN_Switch.setChecked(false);
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7e7e7e")));
+                editText.setEnabled(true);
+                toastBoolean = true;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         // Checks for if the switch is on/off, then change the status text.
         VPN_Switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(numAuthenticate(((EditText) findViewById(R.id.editText2)).getText().toString())) {
+
+                // Checks if there is a 10 digit number
+                if (numAuthenticate(((EditText) findViewById(R.id.editText2)).getText().toString())) {
+                    // If the switch is off, set status to OFF, color to grey, and make the field editable
                     if (!buttonView.isChecked()) {
                         status.setText(VPN_Status[0]);
                         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7e7e7e")));
-                        EditText editText = (EditText) findViewById(R.id.editText2);
                         editText.setEnabled(true);
+                        toastBoolean = true;
 
                         startService(new Intent(MainActivity.this, MmsVpnService.class).setAction(MmsVpnService.ACTION_DISCONNECT));
-                    }
-                }
-                else {
-                    VPN_Switch.setChecked(false);
-                }
-                if (buttonView.isChecked()) {
-                    status.setText(VPN_Status[1]);
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4b77ef")));
-                    EditText editText = (EditText) findViewById(R.id.editText2);
-                    editText.setEnabled(false);
-
-                    Log.i("AAAAAA", "START");
-                    Intent intent = VpnService.prepare(MainActivity.this);
-                    if (intent != null) {
-                        startActivityForResult(intent, 0);
                     } else {
-                        startService(new Intent(MainActivity.this, MmsVpnService.class).setAction(MmsVpnService.ACTION_CONNECT).putExtra("number", editText.getText().toString()));
+                        status.setText(VPN_Status[1]);
+                        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4b77ef")));
+                        editText.setEnabled(false);
+                        
+                        Intent intent = VpnService.prepare(MainActivity.this);
+                        if (intent != null) {
+                            startActivityForResult(intent, 0);
+                        } else {
+                            startService(new Intent(MainActivity.this, MmsVpnService.class).setAction(MmsVpnService.ACTION_CONNECT).putExtra("number", editText.getText().toString()));
+                        }
+
                     }
+                    // If it's not on, keep off and editable
+                } else {
+                    VPN_Switch.setChecked(false);
+                    status.setText(VPN_Status[0]);
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7e7e7e")));
+                    editText.setEnabled(true);
+                    toastBoolean = true;
+
+                    startService(new Intent(MainActivity.this, MmsVpnService.class).setAction(MmsVpnService.ACTION_DISCONNECT));
                 }
             }
         });
@@ -88,21 +116,23 @@ public class MainActivity extends AppCompatActivity {
     public void sendMessage(View view) {
         EditText editText = (EditText) findViewById(R.id.editText2);
         String phoneNumber = editText.getText().toString();
-
         if (numAuthenticate(phoneNumber)) {
             ((Switch) findViewById(R.id.VPN_Switch)).setChecked(true);
         }
-
         System.out.println(phoneNumber);
     }
 
     public boolean numAuthenticate(String phoneNumber) {
         int duration = Toast.LENGTH_SHORT;
         if(phoneNumber == null || phoneNumber.length() != 10) {
-            Context context = getApplicationContext();
-            Toast toast = Toast.makeText(context, "Please submit a 10-digit phone number", duration);
-            toast.show();
-            return false;
+            if (toastBoolean) {
+                Context context = getApplicationContext();
+                Toast toast = Toast.makeText(context, "Please submit a 10-digit phone number", duration);
+                toast.show();
+                return false;
+            } else {
+                toastBoolean = false;
+            }
         }
         return true;
     }
