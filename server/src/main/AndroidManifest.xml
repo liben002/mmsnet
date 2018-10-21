@@ -26,19 +26,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+              <action android:name="android.intent.action.MAIN" />
+
+              <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service android:name="com.android.mms.transaction.TransactionService"/>
 
-        <receiver
-            android:name="com.klinker.android.send_message.SentReceiver"
-            android:taskAffinity="com.pantherman594.mmsnet.server.SMS_SENT"/>
-
-        <receiver
-            android:name="com.klinker.android.send_message.DeliveredReceiver"
-            android:taskAffinity="com.pantherman594.mmsnet.server.SMS_DELIVERED"/>
-
-        <!-- Your custom receiver which is child of com.klinker.android.send_message.MmsSentReceiver -->
     </application>
 
 </manifest>

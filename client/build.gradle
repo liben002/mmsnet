@@ -26,4 +26,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.github.Cielsk:clearable-edittext:0.0.5'
+
+    implementation 'com.klinkerapps:android-smsmms:5.1.0'
 }

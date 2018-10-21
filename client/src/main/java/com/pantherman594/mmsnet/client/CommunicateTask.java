@@ -1,4 +1,4 @@
-package com.pantherman594.mmsnet.server;
+package com.pantherman594.mmsnet.client;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
@@ -11,9 +11,16 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
-public class ClientTask extends AsyncTask<ContentResolver, String, String> {
+public class CommunicateTask extends AsyncTask<ContentResolver, String, String> {
+    private String serverAddresss;
+    private Server server;
+
+    public CommunicateTask(String serverAddress) {
+        this.serverAddresss = serverAddress;
+        this.server = new Server(serverAddress);
+    }
+
     @Override
     protected String doInBackground(ContentResolver... contentResolvers) {
         while (!isCancelled()) {
@@ -28,9 +35,7 @@ public class ClientTask extends AsyncTask<ContentResolver, String, String> {
                 Log.i("AAAAAAAA", "b");
                 do {
                     Log.i("AAAAAAAA", "c");
-                    String contentType = query.getString(query.getColumnIndex("ct_t"));
-                    Log.i("AAAAAAAA", Arrays.toString(query.getColumnNames()));
-                    Log.i("AAAAAAAA", "ct " + query.getType(query.getColumnIndex("ct_t")));
+                    String contentType = query.getString(query.getColumnIndex(Telephony.Mms.CONTENT_TYPE));
 
                     if ("application/vnd.wap.multipart.related".equals(contentType)) { // It's an MMS
                         String mmsId = query.getString(query.getColumnIndex(Telephony.Mms._ID));
@@ -38,7 +43,7 @@ public class ClientTask extends AsyncTask<ContentResolver, String, String> {
 
                         String senderNumber = getAddressNumber(resolver, mmsId);
 
-                        Client client = Client.getClient(senderNumber);
+                        if (!senderNumber.equals(serverAddresss)) continue;
 
                         Uri mmsUri = Uri.parse("content://mms/part");
                         Cursor cPart = resolver.query(mmsUri, null, selectionPart, null, null);
@@ -52,7 +57,7 @@ public class ClientTask extends AsyncTask<ContentResolver, String, String> {
                                 if ("image/jpeg".equals(type)) {
                                     Bitmap bitmap = getMmsImage(resolver, partId);
 
-                                    client.processImage(bitmap);
+                                    server.processImage(bitmap);
 
                                 }
                             } while (cPart.moveToNext());
