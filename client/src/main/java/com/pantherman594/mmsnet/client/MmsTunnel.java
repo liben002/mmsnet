@@ -1,10 +1,8 @@
 package com.pantherman594.mmsnet.client;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Base64;
 import android.util.Log;
 
 import java.nio.ByteBuffer;
@@ -59,8 +57,7 @@ public class MmsTunnel {
         c.save();
         Log.i("YYYYYYYYY", bmp.toString());
 
-        //MMSManager.sendMmsImage(ClientApplication.getInstance().getApplicationContext(), phoneNumber, bmp);
-        MMSManager.sendMmsImage(ClientApplication.getInstance().getApplicationContext(), phoneNumber, Base64.encodeToString(data, Base64.DEFAULT));
+        MMSManager.sendMmsImage(ClientApplication.getInstance().getApplicationContext(), phoneNumber, bmp);
         return src.array().length;
     }
 
